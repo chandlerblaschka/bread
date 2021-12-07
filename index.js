@@ -7,6 +7,7 @@ const PORT = process.env.PORT
 const app = express()
 
 //MIDDLEWARE - points at views folder
+app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
@@ -17,10 +18,6 @@ app.get('/', (req, res) => {
     res.send('Welcome to an Awesome App about Breads')
 })
 
-app.get('*', (req, res) => {
-  res.send('404')
-})
-
 // Breads
 const breadsController = require('./controllers/breads_controller.js')
 
@@ -28,6 +25,11 @@ const breadsController = require('./controllers/breads_controller.js')
 //const Index = require('../views/index.jsx')
 
 app.use('/breads', breadsController)
+
+//404 - must be below main pages
+app.get('*', (req, res) => {
+  res.send('404')
+})
 
 // LISTEN
 app.listen(PORT, () => {
