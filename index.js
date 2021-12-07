@@ -7,6 +7,7 @@ const PORT = process.env.PORT
 const app = express()
 
 //MIDDLEWARE - points at views folder
+app.use(express.static('public'))
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
