@@ -97,7 +97,7 @@ breads.put('/:id', (req, res) => {
   } else {
     req.body.hasGluten = false
   }
-  Bread.findByIdAndUpdate(req.params.id, req.body, { new: true }) 
+  Bread.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }) 
     .then(updatedBread => {
       console.log(updatedBread) 
       res.redirect(`/breads/${req.params.id}`) 
