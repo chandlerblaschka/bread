@@ -16,6 +16,12 @@ const breadSchema = new Schema({
 
 // helper methods 
 breadSchema.methods.getBakedBy = function(){
+    if (!this.baker) {
+        return 'not available'
+    }
+    if(typeof this.baker === 'string') {
+        return this.baker
+    } 
     return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}`
 }
 
