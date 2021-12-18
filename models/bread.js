@@ -14,8 +14,9 @@ const breadSchema = new Schema({
     }
 })
 
-breadSchema.methods.getBakedBy = function() {
-    return `${this.name} was baked with love by ${this.baker}`
+// helper methods 
+breadSchema.methods.getBakedBy = function(){
+    return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}`
 }
 
 // model and export 
