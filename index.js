@@ -1,3 +1,6 @@
+//ALSO CALLED SERVER.JS
+
+
 // DEPENDENCIES
 const express = require('express')
 const methodOverride = require('method-override')
@@ -26,12 +29,18 @@ app.get('/', (req, res) => {
 })
 
 // Breads
-const breadsController = require('./controllers/breads_controller.js')
-
+//const breadsController = require('./controllers/breads_controller.js')
 //not needed/errors out
-//const Index = require('../views/index.jsx')
+//const Index = require('../views/index.jsx')=
+// app.use('/breads', breadsController)
 
+// breads
+const breadsController = require('./controllers/breads_controller.js')
 app.use('/breads', breadsController)
+
+// bakers 
+const bakersController = require('./controllers/bakers_controller.js')
+app.use('/bakers', bakersController)
 
 //404 - must be below main pages
 app.get('*', (req, res) => {
