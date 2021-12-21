@@ -11,12 +11,12 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const app = express()
 
-mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, 
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true },
   () => { console.log('connected to mongo: ', process.env.MONGO_URI) }
 )
 
 //MIDDLEWARE - points at views folder
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
@@ -25,7 +25,7 @@ app.use(methodOverride('_method'))
 
 // ROUTES
 app.get('/', (req, res) => {
-    res.send('Welcome to an Awesome App about Breads')
+  res.send('Welcome to an Awesome App about Breads')
 })
 
 // Breads
@@ -41,6 +41,10 @@ app.use('/breads', breadsController)
 // bakers 
 const bakersController = require('./controllers/bakers_controller.js')
 app.use('/bakers', bakersController)
+
+//error handler
+const errorHandler = require("./middleware/errorHandler");
+app.use(errorHandler);
 
 //404 - must be below main pages
 app.get('*', (req, res) => {
